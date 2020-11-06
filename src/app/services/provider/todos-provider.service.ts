@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { TodoModel } from '../../model/todo';
+import { API_URL } from '../../../environments/environment';
 
 @Injectable()
 export class TodosProviderService {
@@ -11,11 +12,11 @@ export class TodosProviderService {
   }
 
   getTodos(): Observable<TodoModel[]> {
-    return this.http.get<TodoModel[]>('http://127.0.0.1:5001/todos');
+    return this.http.get<TodoModel[]>(`${API_URL}/todos`);
   }
 
   getTodo(Id: number): Observable<TodoModel> {
-    return this.http.get<TodoModel>(`http://127.0.0.1:5001/todos/${Id}`);
+    return this.http.get<TodoModel>(`${API_URL}/todos/${Id}`);
   }
 
 
