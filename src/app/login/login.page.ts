@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   constructor(private storage: Storage, private router: Router) {
+    //this.storage.clear();
     this.storage.ready().then((result) => {
       this.storage.get('user').then((res) => {
         console.log(res);
