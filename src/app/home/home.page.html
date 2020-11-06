@@ -3,7 +3,7 @@
     <ion-row>
       <ion-buttons end>
     <ion-button (click)="logout()"><ion-icon name="log-out" size="large"></ion-icon></ion-button>
-  </ion-buttons>
+      </ion-buttons>
     <ion-title>
       {{username}} TODOS
     </ion-title>
@@ -14,17 +14,20 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-row>
+        <ion-buttons end>
+      <ion-button (click)="logout()"><ion-icon name="log-out" size="large"></ion-icon></ion-button>
+        </ion-buttons>
+      <ion-title>
+        {{username}} TODOS
+      </ion-title>
+    </ion-row>
     </ion-toolbar>
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let todo of todos">
-      <ion-label>
-        <ion-text>
-          <h3>Todo #{{todo.id}}</h3>
-        </ion-text>
-      </ion-label>
+    <ion-item *ngFor="let todo of todos" >
+      <a [routerLink]="['/todo',todo.id]">Task #{{todo.id}}</a>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">

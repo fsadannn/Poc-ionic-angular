@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TODOPage implements OnInit {
 
+  private Id;
+
   constructor() { }
 
   ngOnInit() {
