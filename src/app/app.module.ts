@@ -16,6 +16,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { TodosEffects } from './effects/todos.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +29,8 @@ import { environment } from '../environments/environment';
     IonicStorageModule.forRoot(),
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([TodosEffects])
   ],
   providers: [
     StatusBar,
