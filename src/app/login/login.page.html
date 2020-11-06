@@ -1,9 +1,33 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>
+      Login
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
+  <div id="container">
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label fixed>User Name: </ion-label>
+          <ion-input type="text" placeholder="John Doe" #username></ion-input>
+        </ion-item>
+        <ion-button full color="primary" (click)="login(username)" [disabled]="!username.value">Submit</ion-button>
+      </ion-card-content>
+    </ion-card>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  </div>
 </ion-content>
