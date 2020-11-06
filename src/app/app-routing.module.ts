@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./todo/todo.module').then( m => m.TODOPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: '**',
+    redirectTo: 'login',
+  },
 
 
 ];
