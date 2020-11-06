@@ -11,25 +11,31 @@
 
 <ion-content>
   <div id="container">
-    <ion-grid>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col size="10">
-        <ion-card>
-          <ion-card-content>
-            <ion-list>
-            <ion-item lines="none" class="{{(todoData$ | async)?.completed ? 'donetaks' : 'pendingtask'}}">
-              <ion-text >{{(todoData$ | async)?.title}}</ion-text>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-text >Status: {{(todoData$ | async)?.completed ? "Done" : "Pending"}}</ion-text>
-            </ion-item>
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
-    </ion-col>
-    <ion-col></ion-col>
-  </ion-row>
-</ion-grid>
+    <div *ngIf="error$ | async as error">
+      <h1 class="error-message"><ion-icon name="bug-outline" size="large"></ion-icon> {{ error }}</h1>
+    </div>
+    <ion-grid *ngIf="todoData$ | async as data; else elseBlock">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size="10">
+          <ion-card>
+            <ion-card-content>
+              <ion-list>
+              <ion-item lines="none" class="{{data.completed ? 'donetaks' : 'pendingtask'}}">
+                <ion-text >{{data.title}}</ion-text>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-text >Status: {{data.completed ? "Done" : "Pending"}}</ion-text>
+              </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ng-template #elseBlock>
+      <ion-spinner size="large"></ion-spinner>
+    </ng-template>
   </div>
 </ion-content>

@@ -8,6 +8,7 @@ export enum ParticulartodoActionTypes {
 
 export class LoadParticulartodos implements Action {
   readonly type = ParticulartodoActionTypes.LoadParticulartodos;
+  constructor(public payload: { Id: any }) { }
 }
 
 export class LoadParticulartodosSuccess implements Action {

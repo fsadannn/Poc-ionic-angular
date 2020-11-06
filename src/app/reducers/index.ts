@@ -16,6 +16,7 @@ export interface TodosState {
 }
 
 export interface ParticularTodoState {
+  Id: number | null
   todo: TodoModel | null;
   error: string | null;
 }
@@ -49,18 +50,21 @@ export function particularTodoReducer(state: ParticularTodoState, action: Partic
   switch (action.type) {
     case ParticulartodoActionTypes.LoadParticulartodos:
       return {
+        Id: action.payload.Id,
         todo: null,
         error: null,
        };
 
        case ParticulartodoActionTypes.LoadParticulartodosSuccess:
         return {
+          Id: state.Id,
           todo: action.payload.data,
           error: null,
          };
 
       case ParticulartodoActionTypes.LoadParticulartodosFailure:
       return {
+        Id: state.Id,
         todo: null,
         error: action.payload.error,
       };

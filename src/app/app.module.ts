@@ -18,6 +18,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { TodosEffects } from './effects/todos.effects';
+import { ParticulartodoEffects } from './effects/particulartodo.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import { TodosEffects } from './effects/todos.effects';
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([TodosEffects])
+    EffectsModule.forRoot([TodosEffects, ParticulartodoEffects])
   ],
   providers: [
     StatusBar,
