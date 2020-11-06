@@ -26,7 +26,7 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let todo of todos" >
+    <ion-item *ngFor="let todo of todos$ | async" >
       <a [routerLink]="['/todo',todo.id]">Task #{{todo.id}}</a>
     </ion-item>
   </ion-list>

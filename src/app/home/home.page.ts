@@ -2,9 +2,11 @@ import { Component, ViewChild  } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { TodoModel } from '../model/todo';
 import { TODOPage } from '../todo/todo.page';
+import { TodosProviderService } from '../services/provider/todos-provider.service';
 
 @Component({
   selector: 'app-home',
@@ -15,23 +17,23 @@ export class HomePage {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   public username: string;
-  public todos: Array<TodoModel>;
+  public todos$: Observable<TodoModel[]>;
 
-  constructor(private http: HttpClient, private storage: Storage, private router: Router) {
+  constructor(private todoProvider: TodosProviderService, private storage: Storage, private router: Router) {
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit(): void {
+    /*this.todoProvider.getTodos().subscribe((todos) => {
+      console.log('load todos from suscribe to observable');
+      this.todos = todos;
+    });*/
+    this.todos$ = this.todoProvider.getTodos();
     this.storage.ready().then((result) => {
       result.getItem('user').then((res) => {
         console.log('home', res);
+        // tslint:disable-next-line: no-string-literal
         this.username = res['name'];
-        this.http.get('http://127.0.0.1:5001/todos').subscribe(res => {
-          this.todos = (res as Array<object>).map<TodoModel>((value) => {
-            return new TodoModel(value['completed'], value['id'], value['title'], value['userId']);
-          });
-          console.log(this.todos);
-        });
       });
     }).catch((err) => {
       console.log(err);

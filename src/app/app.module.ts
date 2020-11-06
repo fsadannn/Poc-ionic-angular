@@ -11,6 +11,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptorService } from './services/interceptors/http-interceptor.service';
+import { TodosProviderService } from './services/provider/todos-provider.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,8 @@ import { HttpInterceptorService } from './services/interceptors/http-interceptor
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    TodosProviderService
   ],
   bootstrap: [AppComponent]
 })
