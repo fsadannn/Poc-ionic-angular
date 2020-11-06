@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -12,8 +13,9 @@ function capitalizeFirstLetter(str: string): string {
 })
 export class LoginPage implements OnInit {
 
-  constructor(private storage: Storage, private router: Router) {
-    //this.storage.clear();
+  public loginCardSize = 10;
+
+  constructor(private storage: Storage, private router: Router, private platform: Platform) {
     this.storage.ready().then((result) => {
       result.getItem('user').then((val) => {
         console.log('login',val);
@@ -24,6 +26,12 @@ export class LoginPage implements OnInit {
    }
 
   ngOnInit() {
+    this.platform.ready().then(() => {
+      if(this.platform.isLandscape()){
+        this.loginCardSize = 6;
+      }
+      console.log(this.platform.isLandscape());
+    });
   }
 
   login(username){
