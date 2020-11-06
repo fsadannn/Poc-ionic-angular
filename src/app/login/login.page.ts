@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
         name: capitalizeFirstLetter(username.value),
       };
       result.setItem('user', user).then((val) => {
-        this.router.navigate(['home']);
+        this.router.navigate(['todos']);
       });
     }).catch((err) => {
       console.log(err);

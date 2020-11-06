@@ -1,9 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>TODO #{{Id}}</ion-title>
+    <ion-row>
+      <ion-buttons end>
+    <ion-button ><a [routerLink]="['/todos']"><ion-icon name="arrow-back-outline" size="large"></ion-icon></a></ion-button>
+      </ion-buttons>
+      <ion-title>TODO #{{Id}}</ion-title>
+  </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div id="container">
+    <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col size="10">
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+            <ion-item lines="none" class="{{(todoData$ | async)?.completed ? 'donetaks' : 'pendingtask'}}">
+              <ion-text >{{(todoData$ | async)?.title}}</ion-text>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-text >Status: {{(todoData$ | async)?.completed ? "Done" : "Pending"}}</ion-text>
+            </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>
+  </div>
 </ion-content>
