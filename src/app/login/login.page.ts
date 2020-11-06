@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 
+function capitalizeFirstLetter(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -26,7 +29,7 @@ export class LoginPage implements OnInit {
   login(username){
     this.storage.ready().then((result) => {
       const user = {
-        name: username.value,
+        name: capitalizeFirstLetter(username.value),
       };
       result.setItem('user', user).then((val) => {
         this.router.navigate(['home']);
