@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Poc</string>
+    <string name="title_activity_main">Poc</string>
+    <string name="package_name">poc.test.com</string>
+    <string name="custom_url_scheme">poc.test.com</string>
+</resources>
