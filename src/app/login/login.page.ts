@@ -12,8 +12,8 @@ export class LoginPage implements OnInit {
   constructor(private storage: Storage, private router: Router) {
     //this.storage.clear();
     this.storage.ready().then((result) => {
-      this.storage.get('user').then((res) => {
-        console.log(res);
+      result.getItem('user').then((val) => {
+        console.log('login',val);
       });
     }).catch((err) => {
       console.log(err);
@@ -28,8 +28,9 @@ export class LoginPage implements OnInit {
       const user = {
         name: username.value,
       };
-      this.storage.set('user', user);
-      this.router.navigate(['home']);
+      result.setItem('user', user).then((val) => {
+        this.router.navigate(['home']);
+      });
     }).catch((err) => {
       console.log(err);
     });
