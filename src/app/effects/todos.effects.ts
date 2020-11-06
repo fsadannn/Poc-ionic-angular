@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType  } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers/index';
-import { TodosActionTypes, LoadTodoss, LoadTodossFailure } from '../actions/todos.actions';
+import { TodosActionTypes, LoadTodoss, LoadTodossSuccess, LoadTodossFailure } from '../actions/todos.actions';
 import { TodosProviderService } from '../services/provider/todos-provider.service';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -18,9 +18,9 @@ export class TodosEffects {
     mergeMap((action) => this.todosProvider.getTodos()
     .pipe(
       map(todosData => {
-        return new LoadTodoss({data: todosData});
+        return new LoadTodossSuccess({data: todosData});
       }),
-      catchError((errorMessage) => of(new LoadTodossFailure({error: errorMessage})))
+      catchError((errorMessage) => of(new LoadTodossFailure({error: errorMessage.message})))
       ))
   );
 

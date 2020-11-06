@@ -24,9 +24,15 @@ export function todosReducer(state: TodosState, action: TodosActions): TodosStat
   switch (action.type) {
     case TodosActionTypes.LoadTodoss:
       return {
-        todos: action.payload.data,
+        todos: null,
         error: null,
        };
+
+      case TodosActionTypes.LoadTodossSuccess:
+      return {
+        todos: action.payload.data,
+        error: null,
+      };
 
       case TodosActionTypes.LoadTodossFailure:
       return {
@@ -43,9 +49,15 @@ export function particularTodoReducer(state: ParticularTodoState, action: Partic
   switch (action.type) {
     case ParticulartodoActionTypes.LoadParticulartodos:
       return {
-        todo: action.payload.data,
+        todo: null,
         error: null,
        };
+
+       case ParticulartodoActionTypes.LoadParticulartodosSuccess:
+        return {
+          todo: action.payload.data,
+          error: null,
+         };
 
       case ParticulartodoActionTypes.LoadParticulartodosFailure:
       return {
@@ -73,11 +85,14 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const selectTodos = (state: AppState) => state.todos.todos;
 
-export const selectTodosError = (state: AppState) => state.todos.error;
+export const selectTodosError = (state: AppState) => {
+  console.log(state.todos.error);
+  return state.todos.error;
+}
 
 export const selectParticularTodo = (state: AppState) => state.particularTodo.todo;
 
-export const selectParticularTodoError = (state: AppState) => state.todos.error;
+export const selectParticularTodoError = (state: AppState) => state.particularTodo.error;
 
 
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [] : [];
