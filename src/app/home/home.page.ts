@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { TodoModel } from '../model/todo';
-import { TODOPage } from '../todo/todo.page';
 import { TodosProviderService } from '../services/provider/todos-provider.service';
 
 @Component({
@@ -24,10 +23,6 @@ export class HomePage {
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit(): void {
-    /*this.todoProvider.getTodos().subscribe((todos) => {
-      console.log('load todos from suscribe to observable');
-      this.todos = todos;
-    });*/
     this.todos$ = this.todoProvider.getTodos();
     this.storage.ready().then((result) => {
       result.getItem('user').then((res) => {

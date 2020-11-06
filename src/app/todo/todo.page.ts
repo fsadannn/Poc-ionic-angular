@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router'
+
+
+import { TodoModel } from '../model/todo';
+import { TodosProviderService } from '../services/provider/todos-provider.service';
 
 @Component({
   selector: 'app-todo',
@@ -7,11 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TODOPage implements OnInit {
 
-  private Id;
+  public Id;
+  public todoData$: Observable<TodoModel>;
 
-  constructor() { }
+  constructor(private todoProvider: TodosProviderService, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
+    this.Id = this.activatedRoute.snapshot.paramMap.get('Id');
+    this.todoData$ = this.todoProvider.getTodo(this.Id);
   }
 
 }
